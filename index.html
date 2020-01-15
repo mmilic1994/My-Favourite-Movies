@@ -19,15 +19,15 @@
                 <h1 class="text-center">My Favourite Movies</h1>
             </div>
             <div class="col-12">
-                <form>
+                <form role="form" data-toggle="validator">
                     <div class="form-group">
                         <div class="row mt-3">
                             <div class="col-sm-6 col-md-4 mb-1">
-                                <input type="text" class="form-control" id="movie_title" placeholder="Movie title">
+                                <input type="text" class="form-control" id="movie_title" placeholder="Movie title" required>
                             </div>
                             <div class="col-sm-6 col-md-4 mb-1">
                                 <input type="number" class="form-control" id="movie_rating"
-                                    placeholder="Rate the movie from 1 to 10">
+                                    placeholder="Rate the movie from 1 to 10" required>
                             </div>
                             <div class="col-sm-2 col-md-2 mb-1">
                                 <button type="submit" class="btn btn-primary" id="add-movie-btn">Add movie</button>

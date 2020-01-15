@@ -47,14 +47,17 @@ function updateDOM(data) {
 }
 
 $(document).ready(function () {
+    $('form').validator()
     $addMovieBtn.click(function (e) {
         e.preventDefault();
-        let $newMovie = $(`<tr value="${$movieRating.val()}">
+        if($movieTitle.val() && $movieRating.val()) {
+            let $newMovie = $(`<tr value="${$movieRating.val()}">
                             <td>${$movieTitle.val()}</td>
                             <td class="rating_value">${$movieRating.val()}</td>  
                             <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
                            </tr>`)
         $moviesList.append($newMovie);
+        }
     })
 
     $moviesList.on("click", ".delete_movie_btn", function (e) {
