@@ -47,7 +47,6 @@ function updateDOM(data) {
 }
 
 $(document).ready(function () {
-    $('form').validator()
     $addMovieBtn.click(function (e) {
         e.preventDefault();
         if($movieTitle.val() && $movieRating.val()) {
