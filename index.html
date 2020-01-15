@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jquery exercise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">My Favourite Movies</h1>
+            </div>
+            <div class="col-12">
+                <form>
+                    <div class="form-group">
+                        <div class="row mt-3">
+                            <div class="col-sm-6 col-md-4 mb-1">
+                                <input type="text" class="form-control" id="movie_title" placeholder="Movie title">
+                            </div>
+                            <div class="col-sm-6 col-md-4 mb-1">
+                                <input type="number" class="form-control" id="movie_rating"
+                                    placeholder="Rate the movie from 1 to 10">
+                            </div>
+                            <div class="col-sm-2 col-md-2 mb-1">
+                                <button type="submit" class="btn btn-primary" id="add-movie-btn">Add movie</button>
+                            </div>
+                            <div class="col-sm-2 col-md-2 mb-1">
+                                <button type="submit" class="btn btn-success" id="save-movie-btn">Save to localStorage</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table mt-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Rating <i class="fa fa-fw fa-sort descending" style="cursor: pointer;"></i></th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movies_list">
+                        <div class="alert alert-warning text-center" role="alert">
+                            Make a list of your favourite movies.
+                        </div>  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
