@@ -5,6 +5,7 @@ let $addMovieBtn = $("#add-movie-btn");
 let $saveMovieBtn = $("#save-movie-btn");
 let $sortBtn = $(".fa-sort");
 
+
 function sortByKeyDescending(array, key) {
     return array.sort(function (a, b) {
         let x = a[key];
@@ -27,7 +28,8 @@ function getMovieData() {
     for (let i = 1; i < $allRows.length; i++) {
         rating_value.push({
             "rating": parseFloat($allRows[i].getAttribute("value")),
-            "title": $allRows[i].childNodes[1].innerText
+            "title": $allRows[i].children[0].innerText,
+            "posterURL": $allRows[i].children[1].children[0].getAttribute("src")
         })
     }
     return rating_value;
@@ -36,12 +38,23 @@ function getMovieData() {
 function updateDOM(data) {
     $moviesListCopy = $moviesList.children();
     $moviesList.children().remove()
+    let regexURL = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     for (let j = 0; j < data.length; j++) {
-        $moviesList.append(`<tr value="${data[j]["rating"]}">
-    <td>${data[j]["title"]}</td>
-    <td class="rating_value">${data[j]["rating"]}</td>  
-    <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
-    </tr>`)
+        if (regexURL.test(data[j]["posterURL"])) {
+            $moviesList.append(`<tr value="${data[j]["rating"]}">
+                                    <td class="display-4">${data[j]["title"]}</td>
+                                    <td> <img class="img-thumbnail img-responsive" src="${encodeURI(data[j]["posterURL"])}"/> </td>
+                                    <td class="rating_value display-4">${data[j]["rating"]}</td>  
+                                    <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
+                                </tr>`)
+        } else {
+            $moviesList.append(`<tr value="${data[j]["rating"]}">
+                                    <td class="display-4">${data[j]["title"]}</td>
+                                    <td> <img class="img-thumbnail img-responsive" src="http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
+                                    <td class="rating_value display-4">${data[j]["rating"]}</td>  
+                                    <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
+                                </tr>`)
+        }
     }
     return $moviesList;
 }
@@ -49,13 +62,39 @@ function updateDOM(data) {
 $(document).ready(function () {
     $addMovieBtn.click(function (e) {
         e.preventDefault();
-        if($movieTitle.val() && $movieRating.val()) {
-            let $newMovie = $(`<tr value="${$movieRating.val()}">
-                            <td>${$movieTitle.val()}</td>
-                            <td class="rating_value">${$movieRating.val()}</td>  
-                            <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
-                           </tr>`)
-        $moviesList.append($newMovie);
+        if ($movieTitle.val() && $movieRating.val()) {
+            $.ajax({
+                method: "GET",
+                url: "http://www.omdbapi.com/?apikey=e2a7836d&",
+                data: {
+                    t: `${$movieTitle.val().toLowerCase()}`
+                },
+                dataType: "json",
+                success: function (response) {
+                    let regexURL = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+                    if (regexURL.test(response["Poster"])) {
+                        let $newMovie = $(`<tr value="${$movieRating.val()}">
+                                <td class="display-4">${$movieTitle.val()}</td>
+                                <td> <img class="img-thumbnail img-responsive" src="${encodeURI(response["Poster"])}"/> </td>
+                                <td class="rating_value display-4">${$movieRating.val()}</td>  
+                                <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
+                                </tr>`)
+                        $moviesList.append($newMovie);
+                    } else {
+                        let $newMovie = $(`<tr value="${$movieRating.val()}">
+                                <td class="display-4">${$movieTitle.val()}</td>
+                                <td> <img class="img-thumbnail img-responsive" src="http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
+                                <td class="rating_value display-4">${$movieRating.val()}</td>  
+                                <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
+                                </tr>`)
+                        $moviesList.append($newMovie);
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
         }
     })
 
@@ -68,6 +107,7 @@ $(document).ready(function () {
         e.preventDefault();
         if ($(e.target).hasClass("descending")) {
             let rating_value = getMovieData();
+            console.log(rating_value)
             let $sortedRatingValues = sortByKeyDescending(rating_value, "rating");
             updateDOM($sortedRatingValues);
             $(e.target).removeClass("descending");
@@ -79,7 +119,7 @@ $(document).ready(function () {
         }
     })
 
-    $saveMovieBtn.click(function (e){
+    $saveMovieBtn.click(function (e) {
         e.preventDefault()
         let data = getMovieData();
         localStorage.setItem("favourite_movies", JSON.stringify(data))
