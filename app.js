@@ -50,7 +50,7 @@ function updateDOM(data) {
         } else {
             $moviesList.append(`<tr value="${data[j]["rating"]}">
                                     <td class="display-4">${data[j]["title"]}</td>
-                                    <td> <img class="img-thumbnail img-responsive" src="http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
+                                    <td> <img class="img-thumbnail img-responsive" src="https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
                                     <td class="rating_value display-4">${data[j]["rating"]}</td>  
                                     <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
                                 </tr>`)
@@ -65,7 +65,7 @@ $(document).ready(function () {
         if ($movieTitle.val() && $movieRating.val()) {
             $.ajax({
                 method: "GET",
-                url: "http://www.omdbapi.com/?apikey=e2a7836d&",
+                url: "https://www.omdbapi.com/?apikey=e2a7836d&",
                 data: {
                     t: `${$movieTitle.val().toLowerCase()}`
                 },
@@ -83,7 +83,7 @@ $(document).ready(function () {
                     } else {
                         let $newMovie = $(`<tr value="${$movieRating.val()}">
                                 <td class="display-4">${$movieTitle.val()}</td>
-                                <td> <img class="img-thumbnail img-responsive" src="http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
+                                <td> <img class="img-thumbnail img-responsive" src="https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"/></td>
                                 <td class="rating_value display-4">${$movieRating.val()}</td>  
                                 <td><button class="btn btn-danger delete_movie_btn">Delete</button></td>  
                                 </tr>`)
