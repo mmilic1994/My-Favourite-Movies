@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 
@@ -24,17 +24,19 @@
                     <div class="form-group">
                         <div class="row mt-3">
                             <div class="col-sm-6 col-md-4 mb-1">
-                                <input type="text" class="form-control" id="movie_title" placeholder="Movie title" required>
+                                <input type="text" class="form-control" id="movie_title" placeholder="Movie title"
+                                    required>
                             </div>
                             <div class="col-sm-6 col-md-4 mb-1">
                                 <input type="number" class="form-control" id="movie_rating"
                                     placeholder="Rate the movie from 1 to 10" required>
                             </div>
-                            <div class="col-sm-2 col-md-2 mb-1">
+                            <div class="col-sm-12 col-md-2 mb-1">
                                 <button type="submit" class="btn btn-primary" id="add-movie-btn">Add movie</button>
                             </div>
-                            <div class="col-sm-2 col-md-2 mb-1">
-                                <button type="submit" class="btn btn-success" id="save-movie-btn">Save to localStorage</button>
+                            <div class="col-sm-12 col-md-2 mb-1">
+                                <button type="submit" class="btn btn-success" id="save-movie-btn">Save to
+                                    localStorage</button>
                             </div>
                         </div>
                     </div>
@@ -43,21 +45,23 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table mt-3">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Title</th>
-                            <th>Poster</th>
-                            <th>Rating <i class="fa fa-fw fa-sort descending" style="cursor: pointer;"></i></th>
-                            <th>Delete</th>
-                        </tr>
+                <div class="alert alert-warning text-center" role="alert">
+                    Make a list of your favourite movies.
+                </div>
+                <div class="table mt-3">
+                    <div class="table-dark">
+                        <div class="row">
+                            <div class="col-3 th">Title</div>
+                            <div class="col-3 th">Poster</div>
+                            <div class="col-3 th">Rating <i class="fa fa-fw fa-sort descending"
+                                    style="cursor: pointer;"></i></div>
+                            <div class="col-3 th">Delete</div>
+                        </div>
+                    </div>
                     </thead>
-                    <tbody id="movies_list">
-                        <div class="alert alert-warning text-center" role="alert">
-                            Make a list of your favourite movies.
-                        </div>  
-                    </tbody>
-                </table>
+                    <div id="movies_list">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
