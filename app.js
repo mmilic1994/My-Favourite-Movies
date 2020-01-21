@@ -83,7 +83,6 @@ function updateDOM(data) {
             <div class="accordion-toggler tr" value="${data[j]["rating"]}">
             <div class="col-md-3 col-sm-4 text-center">
                     <div class="display-4 d-flex align-items-center">
-                        <i class="fa fa-chevron-down"></i> 
                         <span class="movie-title">${data[j]["title"]}<span>
                     </div>
             </div>
@@ -153,7 +152,6 @@ $(document).ready(function () {
                         <div class="accordion-toggler tr" value="${$movieRating.val()}">
                                     <div class="col-md-3 col-sm-4 text-center">
                                             <div class="display-4 d-flex align-items-center">
-                                                <i class="fa fa-chevron-down"></i> 
                                                 <span class="movie-title">${$movieTitle.val()}<span>
                                             </div>
                                     </div>

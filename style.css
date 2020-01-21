@@ -93,6 +93,9 @@
 }
 
 @media (max-width: 400px) {
+	body {
+		overflow-x: hidden;
+	}
 	.container {
 		padding-right: 2px;
 		padding-left: 2px;
