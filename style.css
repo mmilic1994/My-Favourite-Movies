@@ -108,3 +108,13 @@
 		font-size: 1rem;
 	}
 }
+
+.icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.icon img {
+	height: 200px;
+}
